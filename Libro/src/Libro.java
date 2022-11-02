@@ -1,81 +1,49 @@
+import java.util.Date;
+
 public class Libro {
-    private String titulo;
-    private String autor;
-    private int ejemplares;
-    private int prestados;
 
-    //constructor por defecto
-    public Libro() {
+    public String tituloLibro;
+    public String autorLibro;
+    public String generoLibro;
+    public int cantidadLibro;
+    public int precioLibro;
+
+    public int codigoLibro;
+
+    public Libro(String tituloLibro, String autorLibro, String generoLibro, int cantidadLibro, int precioLibro, int codigoLibro) {
+        this.tituloLibro = tituloLibro;
+        this.autorLibro = autorLibro;
+        this.generoLibro = generoLibro;
+        this.cantidadLibro = cantidadLibro;
+        this.precioLibro = precioLibro;
+        this.codigoLibro = codigoLibro;
     }
 
-    //constructor con parámetros
-    public Libro(String titulo, String autor, int ejemplares, int prestados) {
-        this.titulo = titulo;
-        this.autor = autor;
-        this.ejemplares = ejemplares;
-        this.prestados = prestados;
+    public int getCodigoLibro() {
+        return codigoLibro;
     }
 
-    //getters y setters
-    public String getAutor() {
-        return autor;
+    public String getTituloLibro() {
+        return tituloLibro;
     }
 
-    public void setAutor(String autor) {
-        this.autor = autor;
+    public String getGeneroLibro() {
+        return generoLibro;
     }
 
-    public int getEjemplares() {
-        return ejemplares;
+    public String getAutorLibro() {
+        return autorLibro;
     }
 
-    public void setEjemplares(int ejemplares) {
-        this.ejemplares = ejemplares;
+    public int getCantidadLibro() {
+        return cantidadLibro;
     }
 
-    public int getPrestados() {
-        return prestados;
+    public int getPrecioLibro() {
+        return precioLibro;
     }
 
-    public void setPrestados(int prestados) {
-        this.prestados = prestados;
+    public void compraLibro () {
+        this.cantidadLibro --;
     }
-
-    public String getTitulo() {
-        return titulo;
-    }
-
-    public void setTitulo(String titulo) {
-        this.titulo = titulo;
-    }
-
-    //método para realizar el prestamo de un libro
-    public boolean prestamo() {
-        boolean prestado = true;
-        if (prestados < ejemplares) {
-            prestados++;
-        } else {
-            prestado = false;
-        }
-        return prestado;
-    }
-
-    //método para realizar la devolución de un libro
-    public boolean devolucion() {
-        boolean devuelto = true;
-        if (prestados == 0) {
-            devuelto = false;
-        } else {
-            prestados--;
-        }
-        return devuelto;
-    }
-
-    //método toString sobrescrito para mostrar los datos de la clase Libro
-    @Override
-    public String toString() {
-        return "titulo: " + titulo + "\nautor: " + autor +
-                "\nejemplares: " + ejemplares + "\nprestados: " + prestados;
-    }
-
 }
