@@ -59,4 +59,5 @@ public class Tienda {
     }
         private void setTotalPagar(float totalPagar) { this.totalPagar = totalPagar; }
         public float getTotalPagar() { return totalPagar; }
+
 }

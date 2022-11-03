@@ -5,13 +5,17 @@ import java.util.Scanner;
 
 public class Main {
 
+    private int numeroCuenta;
+    private double saldo;
+
     public static void main(String[] args) {
         List<Libro> libros = new ArrayList<Libro>();
+        Tienda tienda = new Tienda();
 
         Scanner teclado = new Scanner(System.in);
         String nombre, apellido, dni;
         int numeroCuenta, opcion;
-        double saldo, cantidadDinero;
+        double saldo;
 
         System.out.print("Digite el nombre del cliente : ");
         nombre = teclado.next();
@@ -27,13 +31,47 @@ public class Main {
 
         System.out.print("Digite el saldo de la cuenta : ");
         saldo = teclado.nextDouble();
-        System.out.println(""); System.out.println("");
-
+        System.out.println("");
+        System.out.println("");
         Cuenta cuenta = (Cuenta) new Cuenta(numeroCuenta, saldo);
         Cliente cliente = (Cliente) new Cliente(nombre, apellido, dni, cuenta);
 
-        do{
-            System.out.println("\n\tMENU");
+        do {
+            System.out.println("\n\tMENU PRINCIPAL");
+            System.out.println("1- Ir al banco");
+            System.out.println("2- Ir a la Biblioteca");
+            System.out.println("3- Salir");
+            System.out.print("Digite una opcion : ");
+            opcion = teclado.nextInt();
+
+            switch (opcion) {
+                case 1:
+                    menuCuenta(cliente);
+                    break;
+
+                case 2:
+                    menuTienda(libros, tienda);
+                    break;
+
+                case 3:
+                    System.out.println("\nGracias por elegirnos");
+                    break;
+
+                default:
+                    System.out.println("\nOpcion no disponible , vuelva a digitar");
+                    break;
+            }
+        } while (opcion != 3);
+
+    }
+
+    static void menuCuenta(Cliente cliente) {
+        Scanner teclado = new Scanner(System.in);
+        int numeroCuenta, opcion;
+        double cantidadDinero;
+
+        do {
+            System.out.println("\n\tMENU CUENTA");
             System.out.println("1 . Ingresar saldo a la cuenta");
             System.out.println("2 . Retirar saldo de la cuenta");
             System.out.println("3 . Consultar saldo de la cuenta");
@@ -41,15 +79,15 @@ public class Main {
             System.out.print("Digite una opcion : ");
             opcion = teclado.nextInt();
 
-            switch(opcion){
+            switch (opcion) {
                 case 1:
                     System.out.print("\nDigite el numero de cuenta : ");
                     numeroCuenta = teclado.nextInt();
 
-                    if (numeroCuenta != cuenta.getNumeroCuenta()) {
+                    if (numeroCuenta != cliente.cuenta.getNumeroCuenta()) {
                         System.out.println("\nCuenta no encontrada , verifique su número de cuenta");
                         System.out.println("");
-                    } else{
+                    } else {
                         System.out.print("Digite la cantidad de dinero a depositar : ");
                         cantidadDinero = teclado.nextDouble();
 
@@ -65,18 +103,17 @@ public class Main {
                     System.out.print("\nDigite el numero de cuenta : ");
                     numeroCuenta = teclado.nextInt();
 
-                    if (numeroCuenta != cuenta.getNumeroCuenta()) {
+                    if (numeroCuenta != cliente.cuenta.getNumeroCuenta()) {
                         System.out.println("\nNo existe una cuenta con ese número");
                         System.out.println("");
-                    }
-                    else{
+                    } else {
                         System.out.print("\nDigite la cantidad de dinero a retirar : ");
                         cantidadDinero = teclado.nextDouble();
 
-                        if (cliente.consultarSaldo() < cantidadDinero){
+                        if (cliente.consultarSaldo() < cantidadDinero) {
                             System.out.print("Saldo insuficiente");
                             System.out.println("");
-                        }else{
+                        } else {
                             cliente.retirarDinero(cantidadDinero);
                             System.out.println("");
                             System.out.println("Retiro con exito");
@@ -92,7 +129,7 @@ public class Main {
                     System.out.print("\nDigite el numero de cuenta : ");
                     numeroCuenta = teclado.nextInt();
 
-                    if (numeroCuenta != cuenta.getNumeroCuenta()){
+                    if (numeroCuenta != cliente.cuenta.getNumeroCuenta()) {
                         System.out.println("\nNo existe una cuenta con ese número");
                         System.out.println("");
                     } else {
@@ -110,29 +147,20 @@ public class Main {
                     System.out.println("\nOpcion no disponible , vuelva a digitar");
                     break;
             }
-        }while(opcion != 4);
-
-        menuTienda(libros);
-
+        } while (opcion != 4);
     }
 
-
-
-
-    static void menuTienda(List<Libro> libros) {
-
-        Tienda tienda = new Tienda();
+    static void menuTienda(List<Libro> libros, Tienda tienda) {
 
         int opcion;
         Scanner scanner = new Scanner(System.in);
 
         do {
-            System.out.println("\n=== MENU ===");
+            System.out.println("\n=== MENU LIBROS ===");
             System.out.println("1) Agregar un Libro.");
             System.out.println("2) Ir a la Biblioteca.");
             System.out.println("3) Ver mi carrito.");
             System.out.println("4) Salir.");
-            System.out.println("4) Ir al banco.");
             System.out.print("Opcion -> ");
             opcion = scanner.nextInt();
 
@@ -167,7 +195,7 @@ public class Main {
 
                     System.out.println("Articulo agregado correctamente.");
 
-                    //menuTienda(libros);
+                    // menuTienda(libros);
 
                     break;
 
@@ -216,7 +244,7 @@ public class Main {
                         }
                     }
 
-                    //menuTienda(libros);
+                    // menuTienda(libros);
                     break;
 
                 case 3:
@@ -224,7 +252,7 @@ public class Main {
                     /* Mostrar Carrito */
                     tienda.mostrarCarrito();
 
-                    //menuTienda(libros);
+                    // menuTienda(libros);
 
                     break;
 

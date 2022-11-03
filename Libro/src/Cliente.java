@@ -8,7 +8,7 @@ public class Cliente {
     private String apellido;
     private String dni;
 
-    private Cuenta cuenta;
+    public Cuenta cuenta;
 
     static Scanner sc = new Scanner(System.in);
 
